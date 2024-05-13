@@ -1,65 +1,131 @@
 {
-  "name": "react-broken-crystals",
-  "version": "0.1.0",
-  "proxy": "http://localhost:3000",
+  "name": "broken-crystals",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
   "private": true,
-  "dependencies": {
-    "axios": "^0.21.4",
-    "dangerously-set-html-content": "^1.0.8",
-    "file-type": "^16.5.3",
-    "get-browser-fingerprint": "^2.0.1",
-    "history": "^4.10.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-owl-carousel": "^2.3.3",
-    "react-router-dom": "^5.2.0",
-    "web-vitals": "^0.2.4",
-    "xmldom": "^0.6.0"
-  },
+  "license": "UNLICENSED",
   "scripts": {
-    "cypress:run": "cypress open --browser chrome",
-    "test": "start-test 3001 cypress:run",
-    "start": "cross-env PORT=3001 react-scripts start",
-    "build": "react-scripts build && cp -r vcs/git build/.git && cp -r vcs/hg build/.hg && cp -r vcs/svn build/.svn",
-    "eject": "react-scripts eject"
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "prettier --write \"{src,public,test}/**/*.ts\"",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main.js",
+    "lint": "eslint \"{src,public,test}/**/*.ts\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@fastify/cookie": "^8.3.0",
+    "@fastify/multipart": "^7.4.1",
+    "@fastify/session": "^10.1.1",
+    "@fastify/static": "^6.9.0",
+    "@mercuriusjs/gateway": "^1.2.0",
+    "@mikro-orm/core": "^4.5.10",
+    "@mikro-orm/nestjs": "^4.3.1",
+    "@mikro-orm/postgresql": "^4.5.10",
+    "@mikro-orm/sql-highlighter": "^1.0.1",
+    "@nestjs/common": "^9.3.9",
+    "@nestjs/config": "^2.3.1",
+    "@nestjs/core": "^9.3.9",
+    "@nestjs/graphql": "^11.0.0",
+    "@nestjs/mercurius": "^11.0.3",
+    "@nestjs/platform-fastify": "^9.3.9",
+    "@nestjs/swagger": "^6.2.1",
+    "@sectester/bus": "^0.16.5",
+    "@sectester/core": "^0.16.5",
+    "@sectester/repeater": "^0.16.5",
+    "@sectester/reporter": "^0.16.5",
+    "@sectester/runner": "^0.16.5",
+    "@sectester/scan": "^0.16.5",
+    "axios": "^0.21.4",
+    "bcrypt": "^5.1.0",
+    "class-transformer": "^0.5.1",
+    "dot": "^1.1.3",
+    "dotenv": "^8.6.0",
+    "fastify-multipart": "^5.4.0",
+    "fastify-swagger": "^4.17.1",
+    "graphql": "^16.6.0",
+    "jose": "^4.13.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.5",
+    "jwt-simple": "^0.5.6",
+    "libxmljs": "^0.19.7",
+    "mercurius": "^12.2.0",
+    "node-jwk": "^0.1.0",
+    "pg": "^8.9.0",
+    "raw-body": "^2.5.2",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^7.8.0",
+    "stream-buffers": "^3.0.2",
+    "ts-morph": "^17.0.1",
+    "xmldom": "^0.6.0",
+    "xpath": "0.0.34"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/history": "^4.7.8",
-    "@types/node": "^14.14.10",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@types/react-router-dom": "^5.1.6",
-    "@types/xmldom": "^0.1.34",
-    "@typescript-eslint/eslint-plugin": "^4.15.0",
-    "@typescript-eslint/parser": "^4.15.0",
-    "cross-env": "^7.0.3",
-    "cypress": "^6.4.0",
-    "eslint": "^7.20.0",
-    "eslint-config-prettier": "^7.2.0",
-    "jest": "26.6.0",
-    "react-scripts": "4.0.3",
-    "start-server-and-test": "^1.12.0",
-    "typescript": "4.0.5"
+    "@mikro-orm/cli": "^4.5.10",
+    "@nestjs/cli": "^7.5.3",
+    "@nestjs/schematics": "^7.1.3",
+    "@nestjs/testing": "^7.6.18",
+    "@types/axios": "^0.14.0",
+    "@types/dot": "^1.1.5",
+    "@types/estree": "^1.0.0",
+    "@types/jest": "^26.0.24",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/jwk-to-pem": "^2.0.1",
+    "@types/jwt-simple": "^0.5.33",
+    "@types/libxmljs": "^0.18.8",
+    "@types/node": "^14.18.37",
+    "@types/raw-body": "^2.3.0",
+    "@types/stream-buffers": "^3.0.4",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.21",
+    "prettier": "^2.8.4",
+    "supertest": "^6.3.3",
+    "ts-jest": "^26.5.6",
+    "ts-loader": "^8.4.0",
+    "ts-node": "^9.1.0",
+    "tsconfig-paths": "^3.14.2",
+    "typescript": "^4.7.4"
+  },
+  "jest": {
+    "testTimeout": 3000000,
+    "setupFiles": [
+      "dotenv/config"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "configPaths": [
+      "./src/mikro-orm.config.ts",
+      "./dist/mikro-orm.config.js"
+    ]
   }
 }

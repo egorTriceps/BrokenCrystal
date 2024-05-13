@@ -1,25 +1,27 @@
-FROM node:14 AS builder
+FROM node:14
 
-WORKDIR /home/node/bc
+WORKDIR /var/www/
 
 COPY package*.json ./
 
 RUN npm ci -q
 
-COPY .env ./
+COPY config ./config
+COPY tsconfig.build.json ./
 COPY tsconfig.json ./
+COPY nest-cli.json ./
+COPY .env ./
 COPY src ./src
-COPY typings ./typings
-COPY public ./public
-COPY vcs ./vcs
 
 RUN npm run build
+RUN npm prune --production
 
-FROM nginx AS http
+RUN chown -R node:node /var/www/*
 
-COPY --from=builder  /home/node/bc/build /var/www/html
-COPY ./nginx-config/default.conf /etc/nginx/conf.d/default.conf
+USER node
 
-FROM staticfloat/nginx-certbot AS https
+ENV NODE_ENV=production
 
-COPY --from=builder  /home/node/bc/build /var/www/html
+EXPOSE 3000
+
+CMD ["npm", "run", "start:prod"]
